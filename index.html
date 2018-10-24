@@ -57,15 +57,26 @@
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
-            //Draw the 
+            //Draw both our paddle and ball.
             drawPaddle();
             drawBall();
 
-            //Collision detection logic to make sure the ball doesn't exit the screen.
-            if(y + dy > canvas.height - ballRadius || y + dy < 0 + ballRadius){
+            //Collision detection logic for the y axis.
+            //If the ball hits the bottom of the screen, game over!
+            if(y + dy < 0 + ballRadius){
                 dy = -dy;
             }
-
+            else if(y + dy > canvas.height - ballRadius){
+                //Check if the ball hit the paddle, if not GG
+                if(x > paddleX && x < paddleX + paddleWidth){
+                    dy = -dy;
+                }else{
+                    alert('GAME OVER!!');
+                    return document.location.reload();
+                }
+            }
+            
+            //Collision detection logic for the x axis. Constrains the ball to both walls
             if(x + dx > canvas.width - ballRadius || x + dx < 0 + ballRadius){
                 dx = -dx;
             }
