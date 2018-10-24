@@ -31,6 +31,24 @@
         var paddleWidth = 75;
         var paddleX = (canvas.width - paddleWidth) / 2;
         
+        //Brick meta information
+        var brickRowCount = 3;
+        var brickColumnCount = 5;
+        var brickWidth = 75;
+        var brickHeight = 20;
+        var brickPadding = 10;
+        var brickOffsetTop = 30;
+        var brickOffsetLeft = 30;
+        
+        //Create a multi-dimensional array to represent the bricks to destroy
+        var bricks = [];
+        for(let col = 0; col < brickColumnCount; col++) {
+            bricks[col] = [];
+            for(let row = 0; row < brickRowCount; row++){
+                bricks[col][row] = {x: 0, y: 0};
+            }
+        }
+
         //User control variables
         var rightPressed = false;
         var leftPressed = false;
@@ -53,6 +71,25 @@
             ctx.closePath();
         }
         
+        //Draw the bricks
+        function drawBricks() {
+            for(let col = 0; col < brickColumnCount; col++) {
+                for(let row = 0; row < brickRowCount; row++) {
+                    let brickX = (col * (brickWidth + brickPadding)) + brickOffsetLeft;
+                    let brickY = (row * (brickHeight + brickPadding)) + brickOffsetTop
+                    bricks[col][row].x = brickX;
+                    bricks[col][row].y = brickY;
+                    
+                    ctx.beginPath();
+                    ctx.rect(brickX, brickY, brickWidth, brickHeight);
+                    ctx.fillStyle = "#0095DD";
+                    ctx.fill();
+                    ctx.closePath();
+
+                }
+            }
+        }
+
         //draw the screen
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -60,6 +97,7 @@
             //Draw both our paddle and ball.
             drawPaddle();
             drawBall();
+            drawBricks();
 
             //Collision detection logic for the y axis.
             //If the ball hits the bottom of the screen, game over!
