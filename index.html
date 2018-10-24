@@ -5,40 +5,46 @@
     <title>Breakout MDN</title>
     <style>
         * { padding: 0; margin: auto;}
-        canvas { background: #eee, display: block; margin: auto;}
+        canvas { background: #eee; display: block; margin: 0 auto;}
     </style>
 </head>
 <body>
     <canvas id="myCanvas" width="480" height="320"></canvas>
     <script>
+        //Global variables
         var canvas = document.getElementById("myCanvas");
         var ctx = canvas.getContext("2d");
         
-        ctx.beginPath();
-        ctx.rect(20, 40, 50, 50);
-        ctx.fillStyle = "#FF0000";
-        ctx.fill();
-        ctx.closePath();
-
-        ctx.beginPath();
-        ctx.arc(240, 160, 20, 0, Math.PI*2, false);
-        ctx.fillStyle = "black";
-        ctx.fill();
-        ctx.closePath();
-
-        ctx.beginPath();
-        ctx.arc(160, 200, 20, 0, Math.PI*2, false);
-        ctx.strokeStyle = "orange";
-        ctx.stroke();
-        ctx.closePath();
-        
+        //the balls x and y position
         var x = canvas.width/2;
         var y = canvas.height - 30;
         
+        //What to changes the balls x and y position with.
         var dx = 2;
         var dy = -2;
-        var ballRadius = 10;
 
+        //Size of the ball
+        var ballRadius = 10;
+        
+        //Paddle configurations
+        var paddleHeight = 10;
+        var paddleWidth = 75;
+        var paddleX = (canvas.width - paddleWidth) / 2;
+        
+        //User control variables
+        var rightPressed = false;
+        var leftPressed = false;
+
+        //Draw the paddle
+        function drawPaddle() {
+            ctx.beginPath();
+            ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
+            ctx.fillStyle = "#0095DD";
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        //draw the ball
         function drawBall() {
             ctx.beginPath();
             ctx.arc(x, y, ballRadius, 0, Math.PI*2);
@@ -46,14 +52,61 @@
             ctx.fill();
             ctx.closePath();
         }
-
+        
+        //draw the screen
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            //Draw the 
+            drawPaddle();
             drawBall();
+
+            //Collision detection logic to make sure the ball doesn't exit the screen.
+            if(y + dy > canvas.height - ballRadius || y + dy < 0 + ballRadius){
+                dy = -dy;
+            }
+
+            if(x + dx > canvas.width - ballRadius || x + dx < 0 + ballRadius){
+                dx = -dx;
+            }
+            
+            //Handle moving the paddle left and right if the user is pressing a button
+            if(rightPressed && paddleX < canvas.width - paddleWidth){
+                paddleX += 7;
+            }
+            else if(leftPressed && paddleX > 0){
+                paddleX -= 7;
+            }
+
             x += dx;
             y += dy;
+
         }
         
+        //Add event listeners for keys being pressed up & down
+        document.addEventListener("keydown", keyDownHandler, false);
+        document.addEventListener("keyup", keyUpHandler, false);
+        
+        //Handle key down events
+        function keyDownHandler(e) {
+            if(e.keyCode == 39) {
+                rightPressed = true;
+            }
+            else if(e.keyCode == 37) {
+                leftPressed = true;
+            }
+        }
+        
+        //Handle key up events
+        function keyUpHandler(e) {
+            if(e.keyCode ==39){
+                rightPressed = false;
+            }
+            else if(e.keyCode == 37) {
+                leftPressed = false;
+            }
+        }
+
         setInterval(draw, 10);
     </script>
 </body>
