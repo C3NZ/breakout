@@ -45,7 +45,7 @@
         for(let col = 0; col < brickColumnCount; col++) {
             bricks[col] = [];
             for(let row = 0; row < brickRowCount; row++){
-                bricks[col][row] = {x: 0, y: 0};
+                bricks[col][row] = {x: 0, y: 0, status: 1};
             }
         }
 
@@ -71,21 +71,41 @@
             ctx.closePath();
         }
         
-        //Draw the bricks
+        //Draw all of our bricks
         function drawBricks() {
             for(let col = 0; col < brickColumnCount; col++) {
                 for(let row = 0; row < brickRowCount; row++) {
-                    let brickX = (col * (brickWidth + brickPadding)) + brickOffsetLeft;
-                    let brickY = (row * (brickHeight + brickPadding)) + brickOffsetTop
-                    bricks[col][row].x = brickX;
-                    bricks[col][row].y = brickY;
+                    if(bricks[col][row].status == 1) {
+                        //Calculate the x and y value of the brick by it's column/row, the padding we want, and the offset we created
+                        let brickX = (col * (brickWidth + brickPadding)) + brickOffsetLeft;
+                        let brickY = (row * (brickHeight + brickPadding)) + brickOffsetTop
+                        bricks[col][row].x = brickX;
+                        bricks[col][row].y = brickY;
+                        
+                        //Draw an individual brick
+                        ctx.beginPath();
+                        ctx.rect(brickX, brickY, brickWidth, brickHeight);
+                        ctx.fillStyle = "#0095DD";
+                        ctx.fill();
+                        ctx.closePath();
+                    }
+                }
+            }
+        }
+        
+        //Checking to see if the ball collides with any bricks
+        function collisionDetection() {
+            for(let col = 0; col < brickColumnCount; col++) {
+                for(let row = 0; row < brickRowCount; row++) {
+                    const brick = bricks[col][row];
                     
-                    ctx.beginPath();
-                    ctx.rect(brickX, brickY, brickWidth, brickHeight);
-                    ctx.fillStyle = "#0095DD";
-                    ctx.fill();
-                    ctx.closePath();
-
+                    //Make sure that the brick has a status of 1
+                    if(brick.status == 1) {
+                        if(x > brick.x && x < brick.x + brickWidth && y > brick.y && y < brick.y + brickHeight) {
+                            dy = -dy;
+                            brick.status = 0;
+                        }
+                    }
                 }
             }
         }
@@ -96,8 +116,10 @@
             
             //Draw both our paddle and ball.
             drawPaddle();
+            
             drawBall();
             drawBricks();
+            collisionDetection()
 
             //Collision detection logic for the y axis.
             //If the ball hits the bottom of the screen, game over!
