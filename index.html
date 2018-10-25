@@ -40,6 +40,9 @@
         var brickOffsetTop = 30;
         var brickOffsetLeft = 30;
         
+        //Score of the current game
+        var score = 0;
+
         //Create a multi-dimensional array to represent the bricks to destroy
         var bricks = [];
         for(let col = 0; col < brickColumnCount; col++) {
@@ -69,7 +72,7 @@
         
         //Handle key up events
         function keyUpHandler(e) {
-            if(e.keyCode ==39){
+            if(e.keyCode == 39){
                 rightPressed = false;
             }
             else if(e.keyCode == 37) {
@@ -88,6 +91,7 @@
                         if(x > brick.x && x < brick.x + brickWidth && y > brick.y && y < brick.y + brickHeight) {
                             dy = -dy;
                             brick.status = 0;
+                            score++;
                         }
                     }
                 }
@@ -133,6 +137,13 @@
                 }
             }
         }
+        
+        //draw the score 
+        function drawScore() {
+            ctx.font = "16px Arial";
+            ctx.fillStyle = "#0095DD";
+            ctx.fillText("Score: " + score, 8, 20);
+        }
 
         //draw the screen
         function draw() {
@@ -142,7 +153,7 @@
             drawBall();
             drawBricks(); 
             drawPaddle();
-            
+            drawScore();
             //Collision 
             collisionDetection()
 
