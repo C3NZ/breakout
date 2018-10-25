@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <title>Breakout MDN</title>
     <style>
-        * { padding: 0; margin: auto;}
-        canvas { background: #eee; display: block; margin: 0 auto;}
+        * { padding: 0; margin: auto; font-family: Helvetica}
+        canvas { background: #eee; display: block; margin: 0 auto; margin-top: 40px; box-shadow: 10px 5px 5px black;}
+        body {text-align: center;}
+       
     </style>
 </head>
 <body>
+    <h1>REALLY AWESOME BREAKOUT GAME</h1>
     <canvas id="myCanvas" width="480" height="320"></canvas>
     <script>
         //Global variables
@@ -125,11 +128,14 @@
             ctx.fill();
             ctx.closePath();
         }
-        
+        var hslValue = 0;
+        var counter = 0;
         //Draw all of our bricks
         function drawBricks() {
+      
             for(let col = 0; col < brickColumnCount; col++) {
                 for(let row = 0; row < brickRowCount; row++) {
+                    //var hslValue = 0;
                     if(bricks[col][row].status == 1) {
                         //Calculate the x and y value of the brick by it's column/row, the padding we want, and the offset we created
                         let brickX = (col * (brickWidth + brickPadding)) + brickOffsetLeft;
@@ -137,13 +143,26 @@
                         bricks[col][row].x = brickX;
                         bricks[col][row].y = brickY;
                         
+                        hslValue = Math.floor(Math.random() * 360)
                         //Draw an individual brick
                         ctx.beginPath();
                         ctx.rect(brickX, brickY, brickWidth, brickHeight);
-                        ctx.fillStyle = "#0095DD";
+                        ctx.fillStyle = `hsl(${hslValue}, 100%, 50%)`;
                         ctx.fill();
                         ctx.closePath();
+                       
                     }
+                     counter++;
+                     if(counter == 30) {
+                        
+                        counter = 0;
+                        hslValue += 1;
+
+                        if(hslValue > 360){
+                            hslValue = 0
+                        }
+
+                     }
                 }
             }
         }
@@ -214,13 +233,15 @@
 
             x += dx;
             y += dy;
-            
-            //Syncs the framerate accordingly and only draws when needed, producing a smoother animation than setInterval
-            requestAnimationFrame(draw);
 
         } 
-
-        draw();
+        
+        function run() {
+           //    update();
+            draw();
+            requestAnimationFrame(run);
+        }
+        run();
     </script>
 </body>
 </html>
