@@ -37,13 +37,6 @@ let lives = 3;
 
 //Create a multi-dimensional array to represent the bricks to destroy
 const bricks = [];
-for(let col = 0; col < brickColumnCount; col++) {
-    bricks[col] = [];
-    for(let row = 0; row < brickRowCount; row++){
-        bricks[col][row] = new BasicBrick(0, 0, 1);
-    }
-}
-
 
 //Checking to see if the ball collides with any bricks
 function collisionDetection() {
@@ -179,8 +172,9 @@ function draw() {
 
 } 
 
+//Run our code 
 function run() {
-    //update();
+    //update(
     initHandlers();
     //Add event listeners for keys being pressed updd & down
     draw();
