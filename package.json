@@ -1,0 +1,22 @@
+{
+  "name": "breakout",
+  "version": "1.0.0",
+  "description": "A simple game of breakout",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/C3NZ/breakout.git"
+  },
+  "author": "Vincenzo Marcella",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/C3NZ/breakout/issues"
+  },
+  "homepage": "https://github.com/C3NZ/breakout#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}

@@ -1,3 +1,5 @@
+import {BasicBrick} from './brick.js';
+
 //Global variables
 const canvas = document.getElementById("myCanvas");
 const ctx = canvas.getContext("2d");
@@ -31,26 +33,6 @@ const brickOffsetLeft = 30;
 let score = 0;
 let lives = 3;
 
-//Brick class
-class Brick {
-    constructor(x, y, status) {
-        this.x = x;
-        this.y = y;
-        this.status = status;
-    }
-}
-
-//Basic brick class
-class BasicBrick extends Brick{
-    constructor(x, y, status){
-        super(x, y, status);
-        this.brickWidth = 75;
-        this.brickHeight = 20;
-        this.brickPadding = 10;
-        this.brickOffsetTop = 30;
-        this.brickOffsetLeft = 30;
-    }
-}
 
 //Create a multi-dimensional array to represent the bricks to destroy
 const bricks = [];
