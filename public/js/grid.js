@@ -6,6 +6,7 @@ const brickTypes = {
     2: HardBrick
 }
 
+//Classes for creating level grids
 class Grid {
     constructor(difficulty) {
         this.difficulty = difficulty;
@@ -13,7 +14,8 @@ class Grid {
         this.brickColumnCount = 5 * difficulty;
         this.bricks = []
     }
-
+    
+    //Generate all the bricks
     generateBricks() {
         for(let col = 0; col < this.brickColumnCount; col++) {
             this.bricks[col] = [];
@@ -23,7 +25,8 @@ class Grid {
             }
         }
     }
-    
+
+    //Detec collision between the ball and the brick
     detectCollision(ball, brick) {
         if(ball.x > brick.x && ball.x < brick.x + this.brickWidth && ball.y > brick.y && ball.y < brick.y + brickHeight) {
             ball.dy = -ball.dy;
@@ -34,13 +37,13 @@ class Grid {
 
     }
 
+    //Update the grid
     update() {
         for(let col = 0; col < this.brickColumnCount; col++) {
             for(let row = 0; row < this.brickRowCount; row++) {
                 const brick = this.bricks[col][row];
                 const ball = this.game.ball;
                 if(brick.status == 1) {
-                   
                     
                     //Calculate the x and y value of the brick by it's column/row, the padding we want, and the offset we created
                     const brickX = (col * (brick.brickWidth + brick.brickPadding)) + brick.brickOffsetLeft;
@@ -59,8 +62,9 @@ class Grid {
         }
     }
 
+    //Draw to the grid
     draw(ctx) {
-        for(let col =0; col < this.brickColumnCount; col++) {
+        for(let col = 0; col < this.brickColumnCount; col++) {
             for(let row = 0; row < this.brickRowCount; row++) {
                 const brick = this.bricks[col][row];
 

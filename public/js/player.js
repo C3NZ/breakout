@@ -28,14 +28,17 @@ class Player {
         return this.points;
     }
 
+    //Spend points in the future store
     spendPoints(spent) {
         this.points = this.points - spent;
     }
-
+    
+    //decrease the players life (Usually if the ball touches the ground)
     decreaseLife() {
         this.life = this.life - 1;
     }
-
+    
+    //Update the player
     update() {
         //Handle moving the paddle left and right if the user is pressing a button
         if(this.rightPressed && this.paddleX < canvas.width - this.paddleWidth){
@@ -46,7 +49,8 @@ class Player {
         }
 
     }
-
+    
+    //draw the player
     draw(ctx) {
 
     }

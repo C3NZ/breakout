@@ -5,17 +5,6 @@ import {initHandlers} from './utils.js'
 const canvas = document.getElementById("myCanvas");
 const ctx = canvas.getContext("2d");
 
-//the balls x and y position
-let x = canvas.width/2;
-let y = canvas.height - 30;
-
-//What to changes the balls x and y position with.
-let dx = 2;
-let dy = -2;
-
-//Size of the ball
-const ballRadius = 10;
-
 //Brick meta information
 const brickRowCount = 3;
 const brickColumnCount = 5;
@@ -103,32 +92,7 @@ function draw() {
     //Collision 
     collisionDetection()
 
-    //Collision detection logic for the x axis. Constrains the ball to both walls
-    if(x + dx > canvas.width - ballRadius || x + dx < 0 + ballRadius){
-        dx = -dx;
-    }
-
-    //Collision detection logic for the y axis.
-    //If the ball hits the bottom of the screen, game over!
-    if(y + dy < 0 + ballRadius){
-        dy = -dy;
-    }
-    else if(y + dy > canvas.height - ballRadius){
-        //Check if the ball hit the paddle, if not GG
-        if(x > paddleX && x < paddleX + paddleWidth){
-            dy = -dy;
-        }else{
-            lives--;
-            if(!lives) {
-                return document.location.reload();
-            }else {
-                x = canvas.width / 2;
-                y = canvas.height - 30;
-                dx = 2;
-                dy = 2;
-                paddleX = (canvas.width - paddleWidth) / 2;
-            }
-        }
+    
     }
     
                

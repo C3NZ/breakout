@@ -23,6 +23,11 @@ class Game {
         this.canvas = canvas;
         this.ctx = ctx;
         this.entities = entities;
+        
+        for (entity in entities) {
+            this.entities[entity].game = this;
+        }
+        
         this.inputHandler = new InputHandler(this);
         initHandlers(this.inputHandler);
         this.running = true;
