@@ -1,4 +1,5 @@
-import {BasicBrick, MediumBrick, HardBrick} from './'
+import {BasicBrick, MediumBrick, HardBrick} from './brick.js';
+
 const brickTypes = {
     0: BasicBrick,
     1: MediumBrick,
@@ -14,15 +15,64 @@ class Grid {
     }
 
     generateBricks() {
-       
         for(let col = 0; col < this.brickColumnCount; col++) {
             this.bricks[col] = [];
             for(let row = 0; row < this.brickRowCount; row++){
                 const Brick = brickTypes[difficulty]
                 this.bricks[col][row] = new Brick(0, 0, 1)
+            }
+        }
     }
-}
+    
+    detectCollision(ball, brick) {
+        if(ball.x > brick.x && ball.x < brick.x + this.brickWidth && ball.y > brick.y && ball.y < brick.y + brickHeight) {
+            ball.dy = -ball.dy;
+            brick.status = 0;
+            return true;
+        }
+        return false;
 
+    }
 
+    update() {
+        for(let col = 0; col < this.brickColumnCount; col++) {
+            for(let row = 0; row < this.brickRowCount; row++) {
+                const brick = this.bricks[col][row];
+                const ball = this.game.ball;
+                if(brick.status == 1) {
+                   
+                    
+                    //Calculate the x and y value of the brick by it's column/row, the padding we want, and the offset we created
+                    const brickX = (col * (brick.brickWidth + brick.brickPadding)) + brick.brickOffsetLeft;
+                    const brickY = (row * (brick.brickHeight + brick.brickPadding)) + brick.brickOffsetTop;
+                    brick.x = brickX;
+                    brick.y = brickY;
+                    
+                    brick.hslValue = 180 +  Math.floor(Math.random() * 75)
+
+                    if(detectCollision(ball, brick)){
+                        const player = this.game.player;
+                        player.score++;
+                    }
+                }
+            }
+        }
+    }
+
+    draw(ctx) {
+        for(let col =0; col < this.brickColumnCount; col++) {
+            for(let row = 0; row < this.brickRowCount; row++) {
+                const brick = this.bricks[col][row];
+
+                if(brick.status == 1) {
+                    //Draw an individual brick
+                    ctx.beginPath();
+                    ctx.rect(brick.x, brick.y, brick.brickWidth, brick.brickHeight);
+                    ctx.fillStyle = `hsl(${brick.hslValue}, 100%, 50%)`;
+                    ctx.fill();
+                    ctx.closePath();
+                }
+            }
+        }
     }
 }

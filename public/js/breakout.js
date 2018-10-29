@@ -16,11 +16,6 @@ let dy = -2;
 //Size of the ball
 const ballRadius = 10;
 
-//Paddle configurations
-const paddleHeight = 10;
-const paddleWidth = 75;
-let paddleX = (canvas.width - paddleWidth) / 2;
-
 //Brick meta information
 const brickRowCount = 3;
 const brickColumnCount = 5;
@@ -29,10 +24,6 @@ const brickHeight = 20;
 const brickPadding = 10;
 const brickOffsetTop = 30;
 const brickOffsetLeft = 30;
-
-//Score and lives of the current game
-let score = 0;
-let lives = 3;
 
 
 //Create a multi-dimensional array to represent the bricks to destroy
@@ -80,25 +71,7 @@ const counter = 0;
 //Draw all of our bricks
 function drawBricks() {
 
-    for(let col = 0; col < brickColumnCount; col++) {
-        for(let row = 0; row < brickRowCount; row++) {
-            //var hslValue = 0;
-            if(bricks[col][row].status == 1) {
-                //Calculate the x and y value of the brick by it's column/row, the padding we want, and the offset we created
-                let brickX = (col * (brickWidth + brickPadding)) + brickOffsetLeft;
-                let brickY = (row * (brickHeight + brickPadding)) + brickOffsetTop
-                bricks[col][row].x = brickX;
-                bricks[col][row].y = brickY;
-                
-                hslValue = 180 +  Math.floor(Math.random() * 75)
-                //Draw an individual brick
-                ctx.beginPath();
-                ctx.rect(brickX, brickY, brickWidth, brickHeight);
-                ctx.fillStyle = `hsl(${hslValue}, 100%, 50%)`;
-                ctx.fill();
-                ctx.closePath();
-               
-        }
+                        }
     }
     }
 }
@@ -130,7 +103,7 @@ function draw() {
     //Collision 
     collisionDetection()
 
-     //Collision detection logic for the x axis. Constrains the ball to both walls
+    //Collision detection logic for the x axis. Constrains the ball to both walls
     if(x + dx > canvas.width - ballRadius || x + dx < 0 + ballRadius){
         dx = -dx;
     }

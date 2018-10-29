@@ -1,5 +1,7 @@
 import {Level} from './level.js';
 import {Player} from './player.js';
+import {Ball} from './ball.js'
+import {InputHandler, initHandlers} from './utils.js';
 
 //wrapper function to start the game with customizable options.
 //You can customize the canvas, level, and player that you can use 
@@ -8,18 +10,21 @@ export function startGame(options={}) {
     const ctx = canvas.getContext("2d");
     let level = options.level || new Level();
     let player = options.player || new Player();
-    const game = new Game(canvas, ctx, level, player);
+    let ball = options.ball || new Ball();
+    let entities = [level, ball, player]
+    const game = new Game(canvas, ctx, entities);
     game.play();
 }
 
 //Instance of the game.
 //Concerned with in game updating and rendering
 class Game {
-    constuctor(canvas, ctx, level, player) {
+    constuctor(canvas, ctx, entities) {
         this.canvas = canvas;
         this.ctx = ctx;
-        this.level = level;
-        this.player = player;
+        this.entities = entities;
+        this.inputHandler = new InputHandler(this);
+        initHandlers(this.inputHandler);
         this.running = true;
     }
 
@@ -46,15 +51,27 @@ class Game {
 
         return false;
     }
-    
+
+    isLevelBeat() {
+        const player = this.player;
+        const level = this.level;
+        
+        if(player.score == level.totalBricks) {
+                
+        }
+    }
+
     update() {
-        this.player.update();
-        this.level.update();
+        for(entity in this.entities) {
+            this.entities[entity].update();
+        }
+        this.isLevelBeat();
     }
     
     draw(ctx) {
-        this.player.draw(ctx);
-        this.level.draw(ctx);
+        for(entity in this.entities) {
+            this.entities[entity].draw(ctx);
+        }
     }
 
     play() {
