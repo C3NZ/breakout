@@ -79,9 +79,14 @@ class Ball {
                     player.paddleX = (canvas.width - paddleWidth) / 2;
                 }
             }
+        }
     }
 
     draw(ctx) {
-
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.ballRadius, 0, Math.PI*2);
+        ctx.fillStyle = "#0095DD";
+        ctx.fill();
+        ctx.closePath();
     }
 }
