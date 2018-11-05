@@ -1,4 +1,4 @@
-import {Level} from './level.js';
+import {Level} from './levels.js';
 import {Player} from './player.js';
 import {Ball} from './ball.js'
 import {InputHandler, initHandlers} from './utils.js';
@@ -31,22 +31,6 @@ class Game {
         this.inputHandler = new InputHandler(this);
         initHandlers(this.inputHandler);
         this.running = true;
-    }
-
-    get level() {
-        return this.level;
-    }
-
-    set level(level) {
-        this.level = level;
-    }
-
-    get player() {
-        return this.player;
-    }
-
-    set player() {
-        this.player = player
     }
 
     isGameOver() {

@@ -1,4 +1,4 @@
-class Player {
+export class Player {
     constructor(canvas) {
         //Paddle configurations
         this.paddleHeight = 10;
