@@ -1,9 +1,7 @@
-import {BasicBrick, MediumBrick, HardBrick} from './brick.js';
+import {BasicBrick} from './brick.js';
 
 const brickTypes = {
-    0: BasicBrick,
-    1: MediumBrick,
-    2: HardBrick
+    0: BasicBrick
 }
 
 //Classes for creating level grids
