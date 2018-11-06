@@ -8,9 +8,9 @@ import {InputHandler, initHandlers} from './utils.js';
 export function startGame(options={}) {
     const canvas = options.canvas || document.getElementById("myCanvas") 
     const ctx = canvas.getContext("2d");
-    let level = options.level || new Level();
-    let player = options.player || new Player();
-    let ball = options.ball || new Ball();
+    let level = options.level || new Level(canvas);
+    let player = options.player || new Player(canvas);
+    let ball = options.ball || new Ball(canvas);
     let entities = [level, ball, player]
     const game = new Game(canvas, ctx, entities);
     game.play();
@@ -69,4 +69,6 @@ class Game {
         requestAnimationFrame(this.play);
     }
 
- }
+}
+
+startGame()

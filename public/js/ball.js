@@ -1,18 +1,14 @@
 export class Ball {
     constructor() {
-        this.x = x;
-        this.y = y;
+        this.x = 100;
+        this.y = 100;
         this.dx = 2;
         this.dy = 2;
         this.ballRadius = 10;
         this.game = null;
     }
 
-    get game() {
-        return this.game;
-    }
-
-    set game(game) {
+    set attachGame(game) {
         if(game == null) {
             this.game = game;
         }else {
@@ -20,37 +16,6 @@ export class Ball {
         }
     }
 
-    get x() {
-        return this.x;
-    }
-
-    set x(newX) {
-        this.x = newX;
-    }
-
-    get y() {
-        return this.y;
-    }
-
-    set y(newY) {
-        this.y = newY;
-    }
-
-    get dx() {
-        return this.dx;
-    }
-
-    set dx(newDx) {
-        this.dx = newDx;
-    }
-
-    get dy() { 
-        return this.dy;
-    }
-
-    set dy(newDy) {
-        this.dy = newDy; 
-    }
 
     update() {
         //Collision detection logic for the x axis. Constrains the ball to both walls

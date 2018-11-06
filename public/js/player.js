@@ -3,29 +3,17 @@ export class Player {
         //Paddle configurations
         this.paddleHeight = 10;
         this.paddleWidth = 75;
-        this.paddleX = (canvas.width - paddleWidth) / 2;
+        this.paddleX = (canvas.width - this.paddleWidth) / 2;
         this.score = 0;
         this.lives = 3;
         this.points = 0;
         this.rightPressed = false;
         this.leftPressed = false;
     }
-    
-    get score() {
-        return this.score;
-    }
 
-    set score(newScore) {
+    set addScore(newScore) {
         this.points = this.points + newScore;
         this.score = newScore;
-    }
-
-    get lives() {
-        return this.lives;
-    }
-
-    get points() {
-        return this.points;
     }
 
     //Spend points in the future store
