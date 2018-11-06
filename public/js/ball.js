@@ -16,7 +16,6 @@ export class Ball {
         }
     }
 
-
     update() {
         //Collision detection logic for the x axis. Constrains the ball to both walls
         if(this.x + this.dx > canvas.width - this.ballRadius || this.x + this.dx < 0 + this.ballRadius){

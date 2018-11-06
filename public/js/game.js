@@ -3,6 +3,8 @@ import {Player} from './player.js';
 import {Ball} from './ball.js'
 import {InputHandler, initHandlers} from './utils.js';
 
+
+
 //wrapper function to start the game with customizable options.
 //You can customize the canvas, level, and player that you can use 
 export function startGame(options={}) {
@@ -13,7 +15,14 @@ export function startGame(options={}) {
     let ball = options.ball || new Ball(canvas);
     let entities = [level, ball, player]
     const game = new Game(canvas, ctx, entities);
-    game.play();
+
+    function play() {
+        game.update();
+        game.draw();
+        requestAnimationFrame(play);
+    }
+
+    play();
 }
 
 //Instance of the game.
@@ -54,7 +63,6 @@ class Game {
         for(entity in this.entities) {
             this.entities[entity].update();
         }
-        this.isLevelBeat();
     }
     
     draw(ctx) {
