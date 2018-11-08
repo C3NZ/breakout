@@ -5,14 +5,23 @@ const brickTypes = {
 }
 
 //Classes for creating level grids
-class Grid {
+export class Grid {
     constructor(difficulty) {
         this.difficulty = difficulty;
         this.brickRowCount = 3 * difficulty;
         this.brickColumnCount = 5 * difficulty;
         this.bricks = []
+        this.game = null;
     }
     
+    attachGame(game) {
+        if(this.game === null) {
+            this.game = game;
+        }else{
+            console.log("You've already attached a game '")
+        }
+    }
+
     //Generate all the bricks
     generateBricks() {
         for(let col = 0; col < this.brickColumnCount; col++) {

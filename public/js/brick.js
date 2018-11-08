@@ -6,38 +6,6 @@ class Brick {
         this.status = status;
         this.hslValue = 0;
     }
-
-    get x() {
-        return this.x;
-    }
-
-    set x(x) {
-        this.x = x;
-    }
-
-    get y() {
-        return this.y;
-    }
-
-    set y(y) {
-        this.y = y;
-    }
-
-    get status() {
-        return this.y;
-    }
-
-    set status(newStatus) {
-        this.status = newStatus;
-    }
-
-    get hslValue() {
-        return this.hslValue;
-    }
-
-    set hslValue(newValue) {
-        this.hslValue = newValue;
-    }
 }
 
 //Basic brick class

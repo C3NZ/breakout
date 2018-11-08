@@ -10,10 +10,18 @@ export class Player {
         this.rightPressed = false;
         this.leftPressed = false;
     }
-
+    
     set addScore(newScore) {
         this.points = this.points + newScore;
         this.score = newScore;
+    }
+
+    attachGame(game) {
+        if(this.game === null) {
+            this.game = game;
+        }else {
+            console.log("You've already attached a game to this entity'")
+        }
     }
 
     //Spend points in the future store

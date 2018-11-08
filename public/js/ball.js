@@ -8,8 +8,8 @@ export class Ball {
         this.game = null;
     }
 
-    set attachGame(game) {
-        if(game == null) {
+    attachGame(game) {
+        if(this.game === null) {
             this.game = game;
         }else {
             console.log("You've already set a game for this object")
@@ -17,6 +17,9 @@ export class Ball {
     }
 
     update() {
+        const player = this.game.entities.player;
+        const canvas = this.game.canvas;
+        
         //Collision detection logic for the x axis. Constrains the ball to both walls
         if(this.x + this.dx > canvas.width - this.ballRadius || this.x + this.dx < 0 + this.ballRadius){
             dx = -dx;
@@ -29,18 +32,18 @@ export class Ball {
         }
         else if(this.y + this.dy > canvas.height - this.ballRadius){
             //Check if the ball hit the paddle, if not GG
-            if(this.x > this.paddleX && x < this.paddleX + this.paddleWidth){
+            if(this.x > this.paddleX && x < player.paddleX + player.paddleWidth){
                 this.dy = -this.dy;
             }else{
-                lives--;
-                if(!lives) {
+                player.lives--;
+                if(!player.lives) {
                     return document.location.reload();
                 }else {
                     this.x = canvas.width / 2;
                     this.y = canvas.height - 30;
                     this.dx = 2;
                     this.dy = 2;
-                    player.paddleX = (canvas.width - paddleWidth) / 2;
+                    player.paddleX = (canvas.width - player.paddleWidth) / 2;
                 }
             }
         }

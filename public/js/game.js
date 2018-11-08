@@ -1,9 +1,7 @@
 import {Level} from './levels.js';
 import {Player} from './player.js';
 import {Ball} from './ball.js'
-import {InputHandler, initHandlers} from './utils.js';
-
-
+import {InputHandler} from './utils.js';
 
 //wrapper function to start the game with customizable options.
 //You can customize the canvas, level, and player that you can use 
@@ -13,32 +11,34 @@ export function startGame(options={}) {
     let level = options.level || new Level(canvas);
     let player = options.player || new Player(canvas);
     let ball = options.ball || new Ball(canvas);
-    let entities = [level, ball, player]
+    let entities = {
+        level: level, 
+        ball: ball, 
+        player: player
+    }
     const game = new Game(canvas, ctx, entities);
 
     function play() {
-        game.update();
-        game.draw();
+        game.play();
         requestAnimationFrame(play);
     }
-
     play();
 }
 
 //Instance of the game.
 //Concerned with in game updating and rendering
 class Game {
-    constuctor(canvas, ctx, entities) {
+    constructor(canvas, ctx, entities) {
         this.canvas = canvas;
         this.ctx = ctx;
         this.entities = entities;
         
-        for (entity in entities) {
-            this.entities[entity].game = this;
+        for (const entity of Object.keys(entities)) {
+            this.entities[entity].attachGame(this);
         }
         
         this.inputHandler = new InputHandler(this);
-        initHandlers(this.inputHandler);
+        this.inputHandler.initHandlers(this.inputHandler);
         this.running = true;
     }
 
@@ -60,21 +60,20 @@ class Game {
     }
 
     update() {
-        for(entity in this.entities) {
+        for(const entity of Object.keys(this.entities)) {
             this.entities[entity].update();
         }
     }
     
-    draw(ctx) {
-        for(entity in this.entities) {
-            this.entities[entity].draw(ctx);
+    draw() {
+        for(const entity of Object.keys(this.entities)) {
+            this.entities[entity].draw(this.ctx);
         }
     }
 
     play() {
         this.update();
-        this.draw(this.ctx);
-        requestAnimationFrame(this.play);
+        this.draw();
     }
 
 }
