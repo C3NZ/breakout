@@ -2,7 +2,7 @@ export class InputHandler {
     constructor(game) {
         this.game = game;
         this.player = this.game.entities.player;
-        this.canvas = this.game.entities.canvas;
+        this.canvas = this.game.canvas;
     }
     
     //handle key down events
@@ -28,7 +28,7 @@ export class InputHandler {
     //Handle mouse movements
     handleMouseMovement(e) {
         const relativeX = e.clientX - this.canvas.offsetLeft;
-        
+         
         if(relativeX > 0 && relativeX < this.canvas.width) {
             this.player.paddle = relativeX - this.player.paddleWidth / 2;
         }

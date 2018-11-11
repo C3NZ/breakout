@@ -9,6 +9,7 @@ export class Player {
         this.points = 0;
         this.rightPressed = false;
         this.leftPressed = false;
+        this.game = null;
     }
     
     set addScore(newScore) {
@@ -37,7 +38,7 @@ export class Player {
     //Update the player
     update() {
         //Handle moving the paddle left and right if the user is pressing a button
-        if(this.rightPressed && this.paddleX < canvas.width - this.paddleWidth){
+        if(this.rightPressed && this.paddleX < this.game.canvas.width - this.paddleWidth){
             this.paddleX += 7;
         }
         else if(this.leftPressed && this.paddleX > 0){
@@ -48,6 +49,11 @@ export class Player {
     
     //draw the player
     draw(ctx) {
-
+        const canvas = this.game.canvas;
+        ctx.beginPath();
+        ctx.rect(this.paddleX, canvas.height - this.paddleHeight, this.paddleWidth, this.paddleHeight);
+        ctx.fillStyle = "#0095DD";
+        ctx.fill();
+        ctx.closePath();
     }
 }

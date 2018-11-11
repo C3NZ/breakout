@@ -38,25 +38,8 @@ class Game {
         }
         
         this.inputHandler = new InputHandler(this);
-        this.inputHandler.initHandlers(this.inputHandler);
+        this.inputHandler.initHandlers();
         this.running = true;
-    }
-
-    isGameOver() {
-        if (this.player.lives == 0) {
-            return true;
-        }
-
-        return false;
-    }
-
-    isLevelBeat() {
-        const player = this.player;
-        const level = this.level;
-        
-        if(player.score == level.totalBricks) {
-                
-        }
     }
 
     update() {
@@ -66,6 +49,7 @@ class Game {
     }
     
     draw() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         for(const entity of Object.keys(this.entities)) {
             this.entities[entity].draw(this.ctx);
         }
@@ -78,4 +62,4 @@ class Game {
 
 }
 
-startGame()
+startGame();
