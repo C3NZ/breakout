@@ -22,7 +22,7 @@ export class Ball {
         
         //Collision detection logic for the x axis. Constrains the ball to both walls
         if(this.x + this.dx > canvas.width - this.ballRadius || this.x + this.dx < 0 + this.ballRadius){
-            dx = -dx;
+            this.dx = -this.dx;
         }
 
         //Collision detection logic for the y axis.
@@ -32,7 +32,7 @@ export class Ball {
         }
         else if(this.y + this.dy > canvas.height - this.ballRadius){
             //Check if the ball hit the paddle, if not GG
-            if(this.x > this.paddleX && x < player.paddleX + player.paddleWidth){
+            if(this.x > player.paddleX && this.x < player.paddleX + player.paddleWidth){
                 this.dy = -this.dy;
             }else{
                 player.lives--;
