@@ -17,7 +17,6 @@ export function startGame(options={}) {
         player: player
     }
     const game = new Game(canvas, ctx, entities);
-    console.log(level)
     function play() {
         game.play();
         requestAnimationFrame(play);

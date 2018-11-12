@@ -58,8 +58,6 @@ export class Grid {
                     const brickY = (row * (brick.brickHeight + brick.brickPadding)) + brick.brickOffsetTop;
                     brick.x = brickX;
                     brick.y = brickY;
-                    console.log(brick.x)
-                    console.log(brick.y)
                     brick.hslValue = 180 +  Math.floor(Math.random() * 75)
 
                     if(this.detectCollision(ball, brick)){
