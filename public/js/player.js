@@ -46,10 +46,28 @@ export class Player {
         }
 
     }
-    
+
+
+    //draw the score 
+    drawScore(ctx) {
+        ctx.font = "16px Arial";
+        ctx.fillStyle = "#0095DD";
+        ctx.fillText("Score: " + this.score, 8, 20);
+    }
+
+    //Draw the lives the player has left
+    drawLives(ctx) {
+        ctx.font = "16px Arial";
+        ctx.fillStyle = "#0095DD";
+        ctx.fillText("Lives: " + this.lives, this.game.canvas.width - 65, 20);
+    }
+
+
     //draw the player
     draw(ctx) {
         const canvas = this.game.canvas;
+        this.drawScore(ctx);
+        this.drawLives(ctx);
         ctx.beginPath();
         ctx.rect(this.paddleX, canvas.height - this.paddleHeight, this.paddleWidth, this.paddleHeight);
         ctx.fillStyle = "#0095DD";

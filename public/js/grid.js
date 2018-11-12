@@ -12,6 +12,7 @@ export class Grid {
         this.brickColumnCount = 5 * difficulty;
         this.bricks = []
         this.game = null;
+        this.generateBricks();
     }
     
     attachGame(game) {
@@ -27,8 +28,8 @@ export class Grid {
         for(let col = 0; col < this.brickColumnCount; col++) {
             this.bricks[col] = [];
             for(let row = 0; row < this.brickRowCount; row++){
-                const Brick = brickTypes[difficulty]
-                this.bricks[col][row] = new Brick(0, 0, 1)
+                const Brick = brickTypes[this.difficulty]
+                this.bricks[col][row] = new BasicBrick(0, 0, 1)
             }
         }
     }
@@ -49,7 +50,7 @@ export class Grid {
         for(let col = 0; col < this.brickColumnCount; col++) {
             for(let row = 0; row < this.brickRowCount; row++) {
                 const brick = this.bricks[col][row];
-                const ball = this.game.ball;
+                const ball = this.game.entities.ball;
                 if(brick.status == 1) {
                     
                     //Calculate the x and y value of the brick by it's column/row, the padding we want, and the offset we created
@@ -57,10 +58,11 @@ export class Grid {
                     const brickY = (row * (brick.brickHeight + brick.brickPadding)) + brick.brickOffsetTop;
                     brick.x = brickX;
                     brick.y = brickY;
-                    
+                    console.log(brick.x)
+                    console.log(brick.y)
                     brick.hslValue = 180 +  Math.floor(Math.random() * 75)
 
-                    if(detectCollision(ball, brick)){
+                    if(this.detectCollision(ball, brick)){
                         const player = this.game.player;
                         player.score++;
                     }
@@ -74,7 +76,6 @@ export class Grid {
         for(let col = 0; col < this.brickColumnCount; col++) {
             for(let row = 0; row < this.brickRowCount; row++) {
                 const brick = this.bricks[col][row];
-
                 if(brick.status == 1) {
                     //Draw an individual brick
                     ctx.beginPath();

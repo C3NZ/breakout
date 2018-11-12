@@ -39,14 +39,15 @@ export class Ball {
                 if(!player.lives) {
                     return document.location.reload();
                 }else {
-                    this.x = canvas.width / 2;
-                    this.y = canvas.height - 30;
-                    this.dx = 2;
-                    this.dy = 2;
+                    this.x = 100;
+                    this.y = 100
                     player.paddleX = (canvas.width - player.paddleWidth) / 2;
                 }
             }
         }
+    
+        this.x += this.dx;
+        this.y += this.dy;
     }
 
     draw(ctx) {

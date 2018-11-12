@@ -9,7 +9,7 @@ const diffs = {
 export class Level {
     constructor(canvas) {
         this.difficulty = diffs["easy"];
-        this.grid = new Grid(canvas);
+        this.grid = new Grid(1) 
         this.game = null;
     }
     
