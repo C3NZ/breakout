@@ -36,7 +36,7 @@ export class Grid {
 
     //Detec collision between the ball and the brick
     detectCollision(ball, brick) {
-        if(ball.x > brick.x && ball.x < brick.x + this.brickWidth && ball.y > brick.y && ball.y < brick.y + brickHeight) {
+        if(ball.x > brick.x && ball.x < brick.x + brick.width && ball.y > brick.y && ball.y < brick.y + brick.height) {
             ball.dy = -ball.dy;
             brick.status = 0;
             return true;
@@ -54,14 +54,14 @@ export class Grid {
                 if(brick.status == 1) {
                     
                     //Calculate the x and y value of the brick by it's column/row, the padding we want, and the offset we created
-                    const brickX = (col * (brick.brickWidth + brick.brickPadding)) + brick.brickOffsetLeft;
-                    const brickY = (row * (brick.brickHeight + brick.brickPadding)) + brick.brickOffsetTop;
+                    const brickX = (col * (brick.width + brick.brickPadding)) + brick.brickOffsetLeft;
+                    const brickY = (row * (brick.height + brick.brickPadding)) + brick.brickOffsetTop;
                     brick.x = brickX;
                     brick.y = brickY;
                     brick.hslValue = 180 +  Math.floor(Math.random() * 75)
 
                     if(this.detectCollision(ball, brick)){
-                        const player = this.game.player;
+                        const player = this.game.entities.player;
                         player.score++;
                     }
                 }
@@ -77,7 +77,7 @@ export class Grid {
                 if(brick.status == 1) {
                     //Draw an individual brick
                     ctx.beginPath();
-                    ctx.rect(brick.x, brick.y, brick.brickWidth, brick.brickHeight);
+                    ctx.rect(brick.x, brick.y, brick.width, brick.height);
                     ctx.fillStyle = `hsl(${brick.hslValue}, 100%, 50%)`;
                     ctx.fill();
                     ctx.closePath();

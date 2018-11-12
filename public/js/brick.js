@@ -12,8 +12,8 @@ class Brick {
 class BasicBrick extends Brick{
     constructor(x, y, status){
         super(x, y, status);
-        this.brickWidth = 75;
-        this.brickHeight = 20;
+        this.width = 75;
+        this.height = 20;
         this.brickPadding = 10;
         this.brickOffsetTop = 30;
         this.brickOffsetLeft = 30;
