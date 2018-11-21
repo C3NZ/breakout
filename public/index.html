@@ -3,17 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Breakout MDN</title>
+    <link rel="stylesheet" href="/css/tv.css"> 
     <style>
         * { padding: 0; margin: auto; font-family: Helvetica}
         canvas { background: #eee; display: block; margin: 0 auto; margin-top: 40px; box-shadow: 10px 5px 5px black;}
-        body {text-align: center; background-image: url("https://i.ytimg.com/vi/i7FNhk-WtzA/maxresdefault.jpg"); background-size:cover;}
-       
     </style>
 </head>
 <body>
-    <h1>REALLY AWESOME BREAKOUT GAME</h1>
+    <div class="television">
+        <div class="television__top">
+            <div class="television__antenna television__antenna--left"></div> 
+            <div class="television__antenna television_antenna--left"></div>
+            <div class="television__antenna_base"></div>
+        </div>
+        <div class="television__center">
+            <div class="television__screen">
+            </div>
+            <div class="television__channels-wrapper">
+                <ul class="television__channels">
+                    <li class="television__channel"></li>
+                </ul>
+            </div>
+        </div>
+        <div class="television__base">
+        
+    </div>    
+
     <canvas id="myCanvas" width="480" height="320"></canvas>
-    <h1>Deep fried canvas coming soon...</h1>
     <script type="module" src="/js/ball.js"></script>
     <script type="module" src="/js/brick.js"></script>
     <script type="module" src="/js/grid.js"></script>
