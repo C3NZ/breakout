@@ -32,7 +32,7 @@ export class Background {
         this.blockWidth = canvas.width / this.blockCount;
         this.blockHeight = canvas.height;
         this.blocks = [];
-
+        this.counter = 0;
         this.createBlocks();
     }
 
@@ -52,9 +52,15 @@ export class Background {
     }
 
     update() {
-        for (const block in this.blocks) {
-            this.blocks[block].update()
+        if (this.counter < 15) {
+            this.counter += 1; 
+        }else{
+            this.counter = 0;
+            for (const block in this.blocks) {
+                this.blocks[block].update()
+            }
         }
+        
     }
 
     draw(ctx) {
