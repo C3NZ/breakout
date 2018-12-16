@@ -46,8 +46,8 @@ class Game {
 }
 
 // wrapper function to start the game with customizable options.
-// You can customize the canvas, level, and player that you can use 
-export function startGame(options = {}) {
+// You can customize the canvas, level, and player that you can use
+function startGame(options = {}) {
     const canvas = options.canvas || document.getElementById('myCanvas');
     const ctx = canvas.getContext('2d');
     const level = options.level || new Level(canvas);
@@ -67,6 +67,5 @@ export function startGame(options = {}) {
     }
     play();
 }
-
 
 startGame();

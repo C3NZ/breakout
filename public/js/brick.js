@@ -8,15 +8,15 @@ class Brick {
     }
 }
 
-//Basic brick class
-class BasicBrick extends Brick{
-    constructor(x, y, status){
+// Basic brick class
+class BasicBrick extends Brick {
+    constructor(x, y, status) {
         super(x, y, status);
-        this.width = 75;
-        this.height = 20;
+        this.width = document.querySelector('canvas').width / 10;
+        this.height = document.querySelector('canvas').height / 20;
         this.brickPadding = 10;
-        this.brickOffsetTop = 30;
-        this.brickOffsetLeft = 30;
+        this.brickOffsetTop = document.querySelector('canvas').height / 2 / 2;
+        this.brickOffsetLeft = document.querySelector('canvas').width / 4;
     }
 }
 

@@ -1,4 +1,4 @@
-import {BasicBrick} from './brick.js';
+import { BasicBrick } from './brick.js';
 
 const brickTypes = {
     0: BasicBrick
@@ -16,19 +16,20 @@ export class Grid {
     }
     
     attachGame(game) {
-        if(this.game === null) {
+        if (this.game === null) {
             this.game = game;
-        }else{
+        } else {
+            // Check to make sure that no more than one game instance is attached
+            // eslint-disable-next-line
             console.log("You've already attached a game '")
         }
     }
 
     //Generate all the bricks
     generateBricks() {
-        for(let col = 0; col < this.brickColumnCount; col++) {
+        for (let col = 0; col < this.brickColumnCount; col += 1) {
             this.bricks[col] = [];
-            for(let row = 0; row < this.brickRowCount; row++){
-                const Brick = brickTypes[this.difficulty]
+            for (let row = 0; row < this.brickRowCount; row += 1){
                 this.bricks[col][row] = new BasicBrick(0, 0, 1)
             }
         }

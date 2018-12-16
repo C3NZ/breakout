@@ -28,9 +28,8 @@ export class InputHandler {
     //Handle mouse movements
     handleMouseMovement(e) {
         const relativeX = e.clientX - this.canvas.offsetLeft;
-         
         if(relativeX > 0 && relativeX < this.canvas.width) {
-            this.player.paddle = relativeX - this.player.paddleWidth / 2;
+            this.player.paddleX = relativeX - this.player.paddleWidth / 2;
         }
     }
     //Initialize all user input handlers
