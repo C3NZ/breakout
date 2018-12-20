@@ -31,6 +31,7 @@ class Game {
     }
 
     draw() {
+        // Draw the game to the screen
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         // Iterate through all entities
         // eslint-disable-next-line
@@ -40,6 +41,7 @@ class Game {
     }
 
     play() {
+        // used for updating and then drawing the game in that order.
         this.update();
         this.draw();
     }

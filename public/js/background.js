@@ -10,7 +10,7 @@ class Block {
     update() {
         if (this.color > 360) {
             this.color = 0;
-        }else{
+        } else {
             this.color += 1;
         }
     }
@@ -21,12 +21,10 @@ class Block {
         ctx.fillStyle = `hsl(${this.color}, 100%, 50%)`;
         ctx.fill();
         ctx.closePath();
- 
     }
 }
 
 export class Background {
-    
     constructor(canvas) {
         this.blockCount = 8
         this.blockWidth = canvas.width / this.blockCount;
@@ -37,10 +35,10 @@ export class Background {
     }
 
     createBlocks() {
-        for(let i = 0; i < this.blockCount; i++) {
+        for (let i = 0; i < this.blockCount; i += 1) {
             const blockX = i * this.blockWidth;
             const blockY = 0;
-            const color = 300 + i; 
+            const color = 300 + i;
             const size = {
                 width: this.blockWidth,
                 height: this.blockHeight
@@ -53,19 +51,20 @@ export class Background {
 
     update() {
         if (this.counter < 15) {
-            this.counter += 1; 
-        }else{
+            this.counter += 1;
+        } else {
             this.counter = 0;
-            for (const block in this.blocks) {
-                this.blocks[block].update()
+            const blockTotal = this.blocks.length;
+            for (let i = 0; i < blockTotal; i += 1) {
+                this.blocks[i].update()
             }
         }
-        
     }
 
     draw(ctx) {
-        for (const block in this.blocks) {
-            this.blocks[block].draw(ctx);
+        const blockLength = this.blocks.length;
+        for (let counter = 0; counter < blockLength; counter += 1) {
+            this.blocks[counter].draw(ctx);
         }
     }
 }

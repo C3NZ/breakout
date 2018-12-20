@@ -1,35 +1,36 @@
-import {Grid} from './grid.js';
-import {Background} from './background.js';
+import { Grid } from './grid.js';
+import { Background } from './background.js';
 
 const diffs = {
-    "easy":0,
-    "medium":1,
-    "hard":2
+    easy: 0,
 }
 
 export class Level {
     constructor(canvas) {
-        this.difficulty = diffs["easy"];
-        this.grid = new Grid(1); 
-        this.background = new Background(canvas); 
+        this.difficulty = diffs.easy;
+        this.grid = new Grid(1);
+        this.background = new Background(canvas);
         this.game = null; 
-    } 
-    
+    }
+
     attachGame(game) {
-        if(this.game === null) {
+        if (this.game === null) {
             this.game = game;
             this.grid.attachGame(game);
-        }else{
+        } else {
+            // eslint-disable-next-line
             console.log('this entity has already been bounded to the game')
         }
-    } 
-    
-    update() { 
+    }
+ 
+    update() {
+        // Update the background and grid
         this.background.update();
         this.grid.update();
     }
 
     draw(ctx) {
+        // Draw the background and grid
         this.background.draw(ctx)
         this.grid.draw(ctx);
     }

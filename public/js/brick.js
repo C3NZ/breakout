@@ -1,4 +1,4 @@
-//Brick class
+// Brick class
 class Brick {
     constructor(x, y, status) {
         this.x = x;
@@ -9,7 +9,8 @@ class Brick {
 }
 
 // Basic brick class
-class BasicBrick extends Brick {
+// eslint-disable-next-line
+export class BasicBrick extends Brick {
     constructor(x, y, status) {
         super(x, y, status);
         this.width = document.querySelector('canvas').width / 10;
@@ -19,5 +20,3 @@ class BasicBrick extends Brick {
         this.brickOffsetLeft = document.querySelector('canvas').width / 4;
     }
 }
-
-export {BasicBrick}
