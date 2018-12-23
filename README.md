@@ -13,4 +13,4 @@ about classes in javascript, I was able to recreate the game in what I think to
 be a more module way.
 
 ### Links
-[Breakout](https://breakout-vm.herokukapp.com)
+[Breakout](https://breakout-vm.herokuapp.com)
