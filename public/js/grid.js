@@ -4,8 +4,8 @@ import { BasicBrick } from './brick.js';
 export class Grid {
     constructor(difficulty) {
         this.difficulty = difficulty;
-        this.brickRowCount = 3 * difficulty;
-        this.brickColumnCount = 5 * difficulty;
+        this.brickRowCount = 5 * difficulty;
+        this.brickColumnCount = 6 * difficulty;
         this.bricks = [];
         this.game = null;
         this.generateBricks();
@@ -54,12 +54,16 @@ export class Grid {
                     const brickY = (row * (brick.height + brick.brickPadding)) + brick.brickOffsetTop;
                     brick.x = brickX;
                     brick.y = brickY;
-                    brick.hslValue = 180 + Math.floor(Math.random() * 75);
 
                     // Check for collision, if it occurred, add to the player score
                     if (this.detectCollision(ball, brick)) {
                         const { player } = this.game.entities;
                         player.score += 1;
+
+                        if (player.score === this.brickColumnCount * this.brickRowCount) {
+                            window.alert('You have won the game!');
+                            return document.location.reload();
+                        }
                     }
                 }
             }
@@ -75,8 +79,10 @@ export class Grid {
                     // Draw an individual brick
                     ctx.beginPath();
                     ctx.rect(brick.x, brick.y, brick.width, brick.height);
-                    ctx.fillStyle = `hsl(${brick.hslValue}, 100%, 50%)`;
+                    ctx.fillStyle = `hsl(${brick.hslValue}, 100%, 0%)`;
+                    ctx.strokeStyle = 'white';
                     ctx.fill();
+                    ctx.stroke();
                     ctx.closePath();
                 }
             }
