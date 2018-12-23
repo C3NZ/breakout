@@ -24,14 +24,51 @@ class Block {
     }
 }
 
+class Arc {
+    // eslint-disable-next-line
+    constructor({ x, y, color, radius, startAngle, endAngle }) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.radius = radius;
+        this.startAngle = startAngle;
+        this.endAngle = endAngle;
+    }
+
+    update() {
+        if (this.color > 360) {
+            this.color = 0;
+        } else {
+            this.color += 1;
+        }
+    }
+
+    draw(ctx) {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, this.startAngle, this.endAngle)
+        ctx.fillStyle = `hsl(${this.color}, 100%, 50%)`;
+        ctx.fill();
+        ctx.closePath();
+    }
+}
+
 export class Background {
     constructor(canvas) {
+        // Instantiate block properties for the background
         this.blockCount = 8
         this.blockWidth = canvas.width / this.blockCount;
         this.blockHeight = canvas.height;
         this.blocks = [];
-        this.counter = 0;
+
+        // Instantiate arc properties for the background
+        this.arcCount = 4;
+        this.arcRadius = canvas.width / this.arcCount;
+        this.arcs = [];
+
+        // Create the counter and background objects
+        this.updateCounter = 0;
         this.createBlocks();
+        this.createArcs(canvas);
     }
 
     createBlocks() {
@@ -49,22 +86,72 @@ export class Background {
         }
     }
 
+    createArcs(canvas) {
+        // Arc object properties
+        const arcProperties = [
+            {
+                x: 0,
+                y: canvas.height / 2,
+                color: 45,
+                radius: this.arcRadius,
+                startAngle: 1.5 * Math.PI,
+                endAngle: 0.5 * Math.PI,
+            },
+            {
+                x: canvas.width / 2,
+                y: 0,
+                color: 90,
+                radius: this.arcRadius,
+                startAngle: 0.0 * Math.PI,
+                endAngle: 1.0 * Math.PI,
+            },
+            {
+                x: canvas.width,
+                y: canvas.height / 2,
+                color: 135,
+                radius: this.arcRadius,
+                startAngle: 0.5 * Math.PI,
+                endAngle: 1.5 * Math.PI,
+            },
+            {
+                x: canvas.width / 2,
+                y: canvas.height,
+                color: 180,
+                radius: this.arcRadius,
+                startAngle: 1.0 * Math.PI,
+                endAngle: 2.0 * Math.PI,
+            },
+        ];
+
+        // Create all the arc objects
+        for (let i = 0; i < this.arcCount; i += 1) {
+            const currentArc = arcProperties[i];
+            const arcObject = new Arc(currentArc);
+            this.arcs.push(arcObject);
+        }
+    }
+
     update() {
-        if (this.counter < 15) {
-            this.counter += 1;
+        if (this.updateCounter < 15) {
+            this.updateCounter += 1;
         } else {
-            this.counter = 0;
-            const blockTotal = this.blocks.length;
-            for (let i = 0; i < blockTotal; i += 1) {
-                this.blocks[i].update()
+            this.updateCounter = 0;
+            for (let counter = 0; counter < this.blockCount; counter += 1) {
+                this.blocks[counter].update();
+            }
+
+            for (let counter = 0; counter < this.arcCount; counter += 1) {
+                this.arcs[counter].update();
             }
         }
     }
 
     draw(ctx) {
-        const blockLength = this.blocks.length;
-        for (let counter = 0; counter < blockLength; counter += 1) {
+        for (let counter = 0; counter < this.blockCount; counter += 1) {
             this.blocks[counter].draw(ctx);
+        }
+        for (let counter = 0; counter < this.arcCount; counter += 1) {
+            this.arcs[counter].draw(ctx);
         }
     }
 }
