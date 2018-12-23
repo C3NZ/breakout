@@ -9,19 +9,23 @@ export class Ball {
     }
 
     attachGame(game) {
-        if(this.game === null) {
+        // Attach a game instance to this game object
+        if (this.game === null) {
             this.game = game;
-        }else {
-            console.log("You've already set a game for this object")
+        } else {
+            // eslint-disable-next-line
+            console.log("You've already set a game for this object");
         }
     }
 
+    // eslint-disable-next-line
     update() {
-        // Update the ball 
-        const player = this.game.entities.player;
-        const canvas = this.game.canvas;
+        // Update the ball
+        const { player } = this.game.entities;
+        const { canvas } = this.game;
 
         // Collision detection logic for the x axis. Constrains the ball to both walls
+        // eslint-disable-next-line
         if (this.x + this.dx > canvas.width - this.ballRadius || this.x + this.dx < 0 + this.ballRadius){
             this.dx = -this.dx;
         }
@@ -53,7 +57,7 @@ export class Ball {
         // Draw the ball on the screen
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.ballRadius, 0, Math.PI * 2);
-        ctx.fillStyle = '#0095DD';
+        ctx.fillStyle = '#000000';
         ctx.fill();
         ctx.closePath();
     }
@@ -62,10 +66,4 @@ export class Ball {
         // Change the velocity of the ball
         this.dy = newDy;
     }
-
-    setStatus(newStatus) {
-        // Change the status of the ball
-        this.status = newStatus;
-    }
-
 }
