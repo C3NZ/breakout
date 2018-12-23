@@ -50,14 +50,14 @@ export class Player {
     // draw the score
     drawScore(ctx) {
         ctx.font = '16px Arial';
-        ctx.fillStyle = '#0095DD';
+        ctx.fillStyle = '#000000';
         ctx.fillText(`Score: ${this.score}`, 8, 20);
     }
 
     // Draw the lives the player has left
     drawLives(ctx) {
         ctx.font = '16px Arial';
-        ctx.fillStyle = '#0095DD';
+        ctx.fillStyle = '#000000';
         ctx.fillText(`Lives: ${this.lives}`, this.game.canvas.width - 65, 20);
     }
 
@@ -68,7 +68,7 @@ export class Player {
         this.drawLives(ctx);
         ctx.beginPath();
         ctx.rect(this.paddleX, canvas.height - this.paddleHeight, this.paddleWidth, this.paddleHeight);
-        ctx.fillStyle = '#0095DD';
+        ctx.fillStyle = '#000000';
         ctx.fill();
         ctx.closePath();
     }
