@@ -25,9 +25,9 @@ export class InputHandler {
 
     // Handle mouse movements
     handleMouseMovement(e) {
-        const relativeX = e.clientX - this.canvas.offsetLeft;
-        if (relativeX > 0 && relativeX < this.canvas.width) {
-            this.player.paddleX = relativeX - this.player.paddleWidth / 2;
+        const relativeX = e.clientX - this.canvas.offsetLeft - (this.player.paddleWidth / 2);
+        if (relativeX > 0 && relativeX < this.canvas.width + this.canvas.offsetLeft) {
+            this.player.paddleX = relativeX;
         }
     }
 
@@ -35,8 +35,6 @@ export class InputHandler {
     initHandlers() {
         document.addEventListener('keydown', this.handleKeyDown.bind(this), false);
         document.addEventListener('keyup', this.handleKeyUp.bind(this), false);
-        document.addEventListener('mousemove', this.handleMouseMovement.bind(this), false);
+        // document.addEventListener('mousemove', this.handleMouseMovement.bind(this), false);
     }
 }
-
-
