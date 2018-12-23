@@ -6,6 +6,11 @@ class Brick {
         this.status = status;
         this.hslValue = 0;
     }
+
+    setStatus(newStatus) {
+        // Change the status of the brick
+        this.status = newStatus;
+    }
 }
 
 // Basic brick class
@@ -15,8 +20,8 @@ export class BasicBrick extends Brick {
         super(x, y, status);
         this.width = document.querySelector('canvas').width / 10;
         this.height = document.querySelector('canvas').height / 20;
-        this.brickPadding = 10;
-        this.brickOffsetTop = document.querySelector('canvas').height / 2 / 2;
-        this.brickOffsetLeft = document.querySelector('canvas').width / 4;
+        this.brickPadding = 0;
+        this.brickOffsetTop = document.querySelector('canvas').height / 6;
+        this.brickOffsetLeft = document.querySelector('canvas').width / 5;
     }
 }
